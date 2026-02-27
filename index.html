@@ -36,10 +36,10 @@
         }
         .hero-content { display: flex; flex-direction: column; align-items: center; gap: 30px; }
         .profile-pic-wrapper {
-            width: 180px; height: 180px;
+            width: 200px; height: 200px;
             border-radius: 50%;
             border: 5px solid white;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             overflow: hidden;
             animation: fadeIn 1s ease-in;
             display: flex; align-items: center; justify-content: center;
@@ -50,14 +50,6 @@
             object-fit: cover;
             object-position: center top;
             display: block;
-        }
-        .profile-initials {
-            font-size: 56px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 2px;
-            font-family: 'Inter', sans-serif;
-            display: none;
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
         h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
@@ -103,15 +95,13 @@
 
     <section class="hero">
         <div class="hero-content container">
-            <div class="profile-pic-wrapper" id="profileWrapper">
-                <img id="profilePhoto" src="profile.jpg" alt="Rajeshkumar Natarajan" class="profile-pic"
-                     onload="this.style.display='block'; document.getElementById('profileInitials').style.display='none';"
-                     onerror="this.style.display='none'; document.getElementById('profileInitials').style.display='flex';">
-                <div class="profile-initials" id="profileInitials" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">RK</div>
+            <div class="profile-pic-wrapper">
+                <img src="profile.jpg" alt="Rajeshkumar Natarajan" class="profile-pic"
+                     onerror="this.parentElement.innerHTML='<span style=font-size:56px;font-weight:700;color:white;letter-spacing:2px>RK</span>'">
             </div>
             <div>
                 <h1>Rajeshkumar Natarajan</h1>
-                <p class="subtitle">RF Antenna & OTA Specialist | Enhancing Wireless Performance | 5G &bull; LTE &bull; Wi-Fi &bull; Bluetooth | Compliance & Certification</p>
+                <p class="subtitle">RF Antenna &amp; OTA Specialist | Enhancing Wireless Performance | 5G &bull; LTE &bull; Wi-Fi &bull; Bluetooth | Compliance &amp; Certification</p>
             </div>
             <div class="cta-buttons">
                 <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" class="btn btn-primary">Connect on LinkedIn</a>
@@ -157,17 +147,17 @@
         <div class="container">
             <h2>Technical Skills</h2>
             <div class="skills">
-                <span class="skill-tag">5G NR (Sub-6 & mmWave)</span>
+                <span class="skill-tag">5G NR (Sub-6 &amp; mmWave)</span>
                 <span class="skill-tag">OTA Testing (TRP/TIS)</span>
                 <span class="skill-tag">Antenna Design (HFSS)</span>
                 <span class="skill-tag">EMI/EMC Compliance</span>
-                <span class="skill-tag">R&S CMW500</span>
-                <span class="skill-tag">VNA & Spectrum Analyzer</span>
+                <span class="skill-tag">R&amp;S CMW500</span>
+                <span class="skill-tag">VNA &amp; Spectrum Analyzer</span>
                 <span class="skill-tag">Python Data Analysis</span>
-                <span class="skill-tag">3GPP & FCC Standards</span>
-                <span class="skill-tag">Satimo & ETS Chambers</span>
+                <span class="skill-tag">3GPP &amp; FCC Standards</span>
+                <span class="skill-tag">Satimo &amp; ETS Chambers</span>
                 <span class="skill-tag">Beamforming Validation</span>
-                <span class="skill-tag">Wi-Fi & Bluetooth</span>
+                <span class="skill-tag">Wi-Fi &amp; Bluetooth</span>
                 <span class="skill-tag">LTE Testing</span>
             </div>
         </div>
@@ -191,16 +181,5 @@
             <p style="margin-top:10px; color:#94a3b8;">Built with passion for RF Engineering Excellence</p>
         </div>
     </footer>
-
-    <script>
-        // Show initials if photo fails to load
-        var img = document.getElementById('profilePhoto');
-        if (img.complete) {
-            if (img.naturalWidth === 0) {
-                img.style.display = 'none';
-                document.getElementById('profileInitials').style.display = 'flex';
-            }
-        }
-    </script>
 </body>
 </html>
