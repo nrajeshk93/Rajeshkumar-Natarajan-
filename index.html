@@ -43,12 +43,21 @@
             overflow: hidden;
             animation: fadeIn 1s ease-in;
             display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
         }
         .profile-pic {
             width: 100%; height: 100%;
             object-fit: cover;
-            object-position: center 15%;
+            object-position: center top;
             display: block;
+        }
+        .profile-initials {
+            font-size: 56px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            display: none;
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
         h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
@@ -94,16 +103,18 @@
 
     <section class="hero">
         <div class="hero-content container">
-            <div class="profile-pic-wrapper">
+            <div class="profile-pic-wrapper" id="profileWrapper">
                 <img id="profilePhoto" src="profile.jpg" alt="Rajeshkumar Natarajan" class="profile-pic"
-                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSIyMCIgZmlsbD0iI2NjYyIvPjxlbGxpcHNlIGN4PSI1MCIgY3k9IjgwIiByeD0iMzAiIHJ5PSIyNSIgZmlsbD0iI2NjYyIvPjwvc3ZnPic'">
+                     onload="this.style.display='block'; document.getElementById('profileInitials').style.display='none';"
+                     onerror="this.style.display='none'; document.getElementById('profileInitials').style.display='flex';">
+                <div class="profile-initials" id="profileInitials" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">RK</div>
             </div>
             <div>
                 <h1>Rajeshkumar Natarajan</h1>
-                <p class="subtitle">RF Antenna & OTA Specialist | Enhancing Wireless Performance | 5G • LTE • Wi-Fi • Bluetooth | Compliance & Certification</p>
+                <p class="subtitle">RF Antenna & OTA Specialist | Enhancing Wireless Performance | 5G &bull; LTE &bull; Wi-Fi &bull; Bluetooth | Compliance & Certification</p>
             </div>
             <div class="cta-buttons">
-                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" class="btn btn-primary" target="_blank">Connect on LinkedIn</a>
+                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" class="btn btn-primary">Connect on LinkedIn</a>
                 <a href="#contact" class="btn btn-outline">Get in Touch</a>
             </div>
         </div>
@@ -112,9 +123,7 @@
     <section id="about" class="bg-white">
         <div class="container">
             <h2>About Me</h2>
-            <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.1rem;line-height:1.8;color:#555;">
-                I am a Senior RF Engineer specializing in antenna performance and Over-The-Air (OTA) testing with expertise in 5G (Sub-6 GHz and mmWave), LTE, Wi-Fi, and Bluetooth technologies. Currently driving RF excellence at <strong>Foxconn</strong>, I focus on TRP/TIS testing, beamforming validation, and ensuring compliance with 3GPP, FCC, and CE standards.
-            </p>
+            <p style="text-align:center; max-width:800px; margin:0 auto; font-size:1.1rem; line-height:1.9;">I am a Senior RF Engineer specializing in antenna performance and Over-The-Air (OTA) testing with expertise in 5G (Sub-6 GHz and mmWave), LTE, Wi-Fi, and Bluetooth technologies. Currently driving RF excellence at <strong>Foxconn</strong>, I focus on TRP/TIS testing, beamforming validation, and ensuring compliance with 3GPP, FCC, and CE standards.</p>
         </div>
     </section>
 
@@ -167,11 +176,11 @@
     <section id="contact" class="bg-light">
         <div class="container" style="text-align:center;">
             <h2>Let's Connect</h2>
-            <p style="font-size:1.1rem;color:#555;margin-bottom:30px;">Interested in collaborating or learning more about RF engineering? Feel free to reach out!</p>
+            <p style="font-size:1.1rem; margin-bottom:30px;">Interested in collaborating or learning more about RF engineering? Feel free to reach out!</p>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" target="_blank" title="LinkedIn">🔗</a>
-                <a href="https://github.com/nrajeshk93" target="_blank" title="GitHub">💻</a>
-                <a href="mailto:rajeshkumar@example.com" title="Email">📧</a>
+                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" title="LinkedIn">&#128279;</a>
+                <a href="https://github.com/nrajeshk93" title="GitHub">&#128187;</a>
+                <a href="mailto:rajeshkumar@example.com" title="Email">&#128231;</a>
             </div>
         </div>
     </section>
@@ -179,8 +188,19 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Rajeshkumar Natarajan. All rights reserved.</p>
-            <p style="margin-top:10px;font-size:0.9rem;">Built with passion for RF Engineering Excellence</p>
+            <p style="margin-top:10px; color:#94a3b8;">Built with passion for RF Engineering Excellence</p>
         </div>
     </footer>
+
+    <script>
+        // Show initials if photo fails to load
+        var img = document.getElementById('profilePhoto');
+        if (img.complete) {
+            if (img.naturalWidth === 0) {
+                img.style.display = 'none';
+                document.getElementById('profileInitials').style.display = 'flex';
+            }
+        }
+    </script>
 </body>
 </html>
