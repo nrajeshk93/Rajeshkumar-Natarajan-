@@ -35,13 +35,20 @@
             color: white; padding: 120px 0; text-align: center;
         }
         .hero-content { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-        .profile-pic {
-            width: 180px; height: 180px; border-radius: 50%;
+        .profile-pic-wrapper {
+            width: 180px; height: 180px;
+            border-radius: 50%;
             border: 5px solid white;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            object-fit: cover; object-position: center top;
+            overflow: hidden;
             animation: fadeIn 1s ease-in;
-            display: block; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .profile-pic {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
         h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
@@ -87,7 +94,10 @@
 
     <section class="hero">
         <div class="hero-content container">
-            <img src="profile.jpg" alt="Rajeshkumar Natarajan" class="profile-pic">
+            <div class="profile-pic-wrapper">
+                <img id="profilePhoto" src="profile.jpg" alt="Rajeshkumar Natarajan" class="profile-pic"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSIyMCIgZmlsbD0iI2NjYyIvPjxlbGxpcHNlIGN4PSI1MCIgY3k9IjgwIiByeD0iMzAiIHJ5PSIyNSIgZmlsbD0iI2NjYyIvPjwvc3ZnPic'">
+            </div>
             <div>
                 <h1>Rajeshkumar Natarajan</h1>
                 <p class="subtitle">RF Antenna & OTA Specialist | Enhancing Wireless Performance | 5G • LTE • Wi-Fi • Bluetooth | Compliance & Certification</p>
