@@ -1,138 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RF OTA Test Engineer | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="hero" id="top">
-      <nav class="nav container">
-        <div class="logo">RF OTA<span>Lab</span></div>
-        <a href="#contact" class="btn btn-sm">Let's Connect</a>
-      </nav>
-
-      <div class="hero-content container">
-        <p class="tag">RF OTA Test Engineer</p>
-        <h1>
-          Building <span>reliable wireless performance</span> through smart,
-          creative OTA validation.
-        </h1>
-        <p class="subtitle">
-          I design and execute over-the-air test strategies for 4G/5G, IoT, and
-          emerging connected devices-turning complex RF behavior into clear,
-          actionable engineering decisions.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn">View Projects</a>
-          <a href="#services" class="btn btn-outline">Explore Services</a>
-        </div>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajeshkumar Natarajan - RF & Antenna Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #1d4ed8;
+            --secondary: #0ea5e9;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            object-fit: cover;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        section {
+            padding: 80px 0;
+        }
+        .bg-white {
+            background: white;
+        }
+        .bg-light {
+            background: var(--light);
+        }
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: block;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .card .company {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .card .date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .cta-buttons { flex-direction: column; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">RK Natarajan</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="stats">
-      <div class="container stats-grid">
-        <div class="stat">
-          <span class="stat-number">8+</span>
-          <span class="stat-label">Years in RF/OTA validation</span>
+    <section class="hero">
+        <div class="hero-content container">
+            <img src="https://via.placeholder.com/180" alt="Rajeshkumar Natarajan" class="profile-pic">
+            <div>
+                <h1>Rajeshkumar Natarajan</h1>
+                <p class="subtitle">RF Antenna & OTA Specialist | Enhancing Wireless Performance | 5G • LTE • Wi-Fi • Bluetooth | Compliance & Certification</p>
+            </div>
+            <div class="cta-buttons">
+                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" class="btn btn-primary" target="_blank">Connect on LinkedIn</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
         </div>
-        <div class="stat">
-          <span class="stat-number">120+</span>
-          <span class="stat-label">Test campaigns completed</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">35%</span>
-          <span class="stat-label">Average test cycle time reduction</span>
-        </div>
-      </div>
     </section>
 
-    <section id="services" class="services">
-      <div class="container">
-        <p class="section-tag">What I Do</p>
-        <h2>High-impact RF OTA engineering services</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>OTA Test Planning</h3>
-            <p>
-              Full test matrix design for TRP/TIS, MIMO, throughput, mobility,
-              and coexistence scenarios across target markets.
+    <section id="about" class="bg-white">
+        <div class="container">
+            <h2>About Me</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: #555;">
+                I am a Senior RF Engineer specializing in antenna performance and Over-The-Air (OTA) testing with expertise in 5G (Sub-6 GHz and mmWave), LTE, Wi-Fi, and Bluetooth technologies. Currently driving RF excellence at <strong>Foxconn</strong>, I focus on TRP/TIS testing, beamforming validation, and ensuring compliance with 3GPP, FCC, and CE standards.
             </p>
-          </div>
-          <div class="card">
-            <h3>Chamber &amp; Lab Optimization</h3>
-            <p>
-              Chamber setup validation, path loss calibration, automation
-              scripting, and repeatability improvements for accurate KPIs.
-            </p>
-          </div>
-          <div class="card">
-            <h3>5G/IoT Performance Analysis</h3>
-            <p>
-              Deep analysis of RF logs and protocol traces to isolate root
-              causes and improve antenna + modem behavior.
-            </p>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section id="projects" class="projects">
-      <div class="container">
-        <p class="section-tag">Highlighted Work</p>
-        <h2>Projects that improved product readiness</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <span class="year"> 2025 </span>
-            <h3>Global 5G Smartphone OTA Program</h3>
-            <p>
-              Led multi-band OTA campaign and reduced certification
-              pre-failures by implementing a risk-based retest strategy.
-            </p>
-          </div>
-          <div class="timeline-item">
-            <span class="year"> 2024 </span>
-            <h3>Industrial IoT Gateway Robustness</h3>
-            <p>
-              Designed harsh channel and orientation test suites that
-              increased field reliability in low-SNR deployments.
-            </p>
-          </div>
-          <div class="timeline-item">
-            <span class="year"> 2023 </span>
-            <h3>Automation Framework for Throughput Testing</h3>
-            <p>
-              Built Python-driven workflows that cut manual lab effort and
-              enabled nightly RF health dashboards.
-            </p>
-          </div>
+    <section id="experience" class="bg-light">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Senior Engineer</h3>
+                    <div class="company">Foxconn</div>
+                    <div class="date">June 2024 - Present | Bengaluru, Karnataka</div>
+                    <p>Leading TRP/TIS testing and 5G beamforming validation for smartphones, routers, and wearables. Conducting spurious emissions testing and antenna desense analysis with advanced OTA chambers (Satimo SG64, StarLab).</p>
+                </div>
+                <div class="card">
+                    <h3>Senior Executive</h3>
+                    <div class="company">Tata Advanced Systems Limited</div>
+                    <div class="date">April 2022 - June 2024 | Bengaluru, Karnataka</div>
+                    <p>Spearheaded EMI/EMC testing for military-grade electronic systems. Authored detailed documentation for NABL audit activities and conducted electromagnetic shielding effectiveness tests.</p>
+                </div>
+                <div class="card">
+                    <h3>Executive</h3>
+                    <div class="company">Eltek Solutions</div>
+                    <div class="date">January 2018 - April 2022 | Chennai, Tamil Nadu</div>
+                    <p>Executed comprehensive RF testing and data visualization. Collaborated with cross-functional teams to deliver data-driven solutions for business challenges.</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Need a stronger OTA strategy?</h2>
-        <p>
-          Let's collaborate on your next RF challenge-from pre-certification
-          readiness to deep performance optimization.
-        </p>
-        <a href="mailto:rf.ota.engineer@example.com" class="btn">Email Me</a>
-      </div>
+    <section id="skills" class="bg-white">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills">
+                <span class="skill-tag">5G NR (Sub-6 & mmWave)</span>
+                <span class="skill-tag">OTA Testing (TRP/TIS)</span>
+                <span class="skill-tag">Antenna Design (HFSS)</span>
+                <span class="skill-tag">EMI/EMC Compliance</span>
+                <span class="skill-tag">R&S CMW500</span>
+                <span class="skill-tag">VNA & Spectrum Analyzer</span>
+                <span class="skill-tag">Python Data Analysis</span>
+                <span class="skill-tag">3GPP & FCC Standards</span>
+                <span class="skill-tag">Satimo & ETS Chambers</span>
+                <span class="skill-tag">Beamforming Validation</span>
+                <span class="skill-tag">Wi-Fi & Bluetooth</span>
+                <span class="skill-tag">LTE Testing</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-light">
+        <div class="container" style="text-align: center;">
+            <h2>Let's Connect</h2>
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 30px;">Interested in collaborating or learning more about RF engineering? Feel free to reach out!</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" target="_blank" title="LinkedIn">🔗</a>
+                <a href="https://github.com/nrajeshk93" target="_blank" title="GitHub">💻</a>
+                <a href="mailto:rajeshkumar@example.com" title="Email">📧</a>
+            </div>
+        </div>
     </section>
 
     <footer>
-      <div class="container">
-        <p>&copy; RF OTA Engineer Portfolio</p>
-        <a href="#top">Back to Top &#8593;</a>
-      </div>
+        <div class="container">
+            <p>&copy; 2026 Rajeshkumar Natarajan. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Built with passion for RF Engineering Excellence</p>
+        </div>
     </footer>
-  </body>
+</body>
 </html>
