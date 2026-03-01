@@ -35,11 +35,13 @@
         h2 { font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--dark); position: relative; }
         h2::after { content: ''; width: 80px; height: 4px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: block; margin: 15px auto 0; border-radius: 2px; }
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card { background: white; padding: 40px 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s; border-top: 4px solid var(--primary); }
+        .card { background: white; padding: 40px 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s; border-top: 4px solid var(--primary); cursor: pointer; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
         .card h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
         .card .company { color: var(--secondary); font-weight: 600; margin-bottom: 5px; }
         .card .date { color: #666; font-size: 0.9rem; margin-bottom: 15px; }
+        .card .expand-hint { margin-top: 18px; display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-size: 0.82rem; font-weight: 600; opacity: 0.6; transition: opacity 0.2s; }
+        .card:hover .expand-hint { opacity: 1; }
         .skills { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
         .skill-tag { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 10px 20px; border-radius: 50px; font-weight: 500; box-shadow: 0 4px 15px rgba(29,78,216,0.3); }
         footer { background: var(--dark); color: white; text-align: center; padding: 40px 0; }
@@ -47,6 +49,50 @@
         .social-links a { color: white; text-decoration: none; font-size: 1.5rem; transition: transform 0.3s; }
         .social-links a:hover { transform: scale(1.2); }
         @media (max-width: 768px) { h1 { font-size: 2.5rem; } .nav-links { display: none; } .cta-buttons { flex-direction: column; width: 100%; } }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 500;
+            background: rgba(15,23,42,0.65);
+            backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 740px; width: 100%;
+            max-height: 88vh; overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+            transform: translateY(30px) scale(0.97);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), opacity 0.3s ease;
+        }
+        .modal-overlay.active .modal { transform: translateY(0) scale(1); opacity: 1; }
+        .modal-header {
+            background: linear-gradient(135deg, rgba(102,126,234,0.95), rgba(118,75,162,0.95));
+            color: white; padding: 36px 40px 30px;
+            border-radius: 20px 20px 0 0; position: relative;
+        }
+        .modal-header h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+        .modal-company { font-size: 1rem; font-weight: 600; opacity: 0.9; margin-bottom: 14px; }
+        .modal-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+        .modal-badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 5px 14px; font-size: 0.8rem; font-weight: 500; }
+        .modal-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .modal-close:hover { background: rgba(255,255,255,0.35); }
+        .modal-body { padding: 32px 40px 36px; }
+        .modal-section-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 16px; margin-top: 28px; display: flex; align-items: center; gap: 8px; }
+        .modal-section-title:first-child { margin-top: 0; }
+        .modal-section-title::before { content: ''; display: inline-block; width: 4px; height: 16px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 2px; }
+        .modal-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .modal-bullets li { display: flex; gap: 10px; align-items: flex-start; color: #444; font-size: 0.9rem; line-height: 1.65; }
+        .modal-bullets li::before { content: '▸'; color: var(--secondary); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; }
+        .modal-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+        .modal-tag { background: linear-gradient(135deg, rgba(29,78,216,0.08), rgba(14,165,233,0.08)); border: 1px solid rgba(29,78,216,0.2); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+        @media (max-width: 600px) { .modal-header, .modal-body { padding: 24px 20px; } .modal-header h3 { font-size: 1.3rem; } }
     </style>
 </head>
 <body>
@@ -61,6 +107,7 @@
             </ul>
         </nav>
     </header>
+
     <section class="hero">
         <div class="hero-content container">
             <div class="profile-pic-wrapper">
@@ -76,37 +123,62 @@
             </div>
         </div>
     </section>
+
     <section id="about" class="bg-white">
         <div class="container">
             <h2>About Me</h2>
             <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.1rem;line-height:1.9;">I am a Senior RF Engineer specializing in antenna performance and Over-The-Air (OTA) testing with expertise in 5G (Sub-6 GHz and mmWave), LTE, Wi-Fi, and Bluetooth technologies. Currently driving RF excellence at <strong>Foxconn</strong>, I focus on TRP/TIS testing, beamforming validation, and ensuring compliance with 3GPP, FCC, and CE standards.</p>
         </div>
     </section>
+
     <section id="experience" class="bg-light">
         <div class="container">
             <h2>Professional Experience</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card" onclick="openModal('foxconn')">
                     <h3>Senior Engineer</h3>
                     <div class="company">Foxconn</div>
                     <div class="date">June 2024 - Present | Bengaluru, Karnataka</div>
                     <p>Leading TRP/TIS testing and 5G beamforming validation for smartphones, routers, and wearables. Conducting spurious emissions testing and antenna desense analysis with advanced OTA chambers (Satimo SG64, StarLab).</p>
+                    <div class="expand-hint">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                        Click to view full details
+                    </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="openModal('tata')">
                     <h3>Senior Executive</h3>
                     <div class="company">Tata Advanced Systems Limited</div>
                     <div class="date">April 2022 - June 2024 | Bengaluru, Karnataka</div>
                     <p>Spearheaded EMI/EMC testing for military-grade electronic systems. Authored detailed documentation for NABL audit activities and conducted electromagnetic shielding effectiveness tests.</p>
+                    <div class="expand-hint">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                        Click to view full details
+                    </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="openModal('eltek')">
                     <h3>Executive</h3>
                     <div class="company">Eltek Solutions</div>
                     <div class="date">January 2018 - April 2022 | Chennai, Tamil Nadu</div>
                     <p>Executed comprehensive RF testing and data visualization. Collaborated with cross-functional teams to deliver data-driven solutions for business challenges.</p>
+                    <div class="expand-hint">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                        Click to view full details
+                    </div>
+                </div>
+                <div class="card" onclick="openModal('sc')">
+                    <h3>Analyst</h3>
+                    <div class="company">Standard Chartered Global Business Services</div>
+                    <div class="date">July 2015 - December 2017 | Chennai, Tamil Nadu</div>
+                    <p>Spearheaded a dedicated quality assurance team, focusing on streamlining processes and enhancing product quality. Played a pivotal role in audit readiness and compliance documentation.</p>
+                    <div class="expand-hint">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                        Click to view full details
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section id="skills" class="bg-white">
         <div class="container">
             <h2>Technical Skills</h2>
@@ -126,6 +198,7 @@
             </div>
         </div>
     </section>
+
     <section id="contact" class="bg-light">
         <div class="container" style="text-align:center;">
             <h2>Let's Connect</h2>
@@ -133,12 +206,120 @@
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/rajeshkumar-natarajan-306205377" title="LinkedIn">&#128279;</a>
                 <a href="https://github.com/nrajeshk93" title="GitHub">&#128187;</a>
-                <a href="/cdn-cgi/l/email-protection#a7d5c6cdc2d4cfccd2cac6d5e7c2dfc6cad7cbc289c4c8ca" title="Email">&#128231;</a>
+                <a href="/cdn-cgi/l/email-protection#2557444f40564d4e5048445765405d44485549400b464a48" title="Email">&#128231;</a>
             </div>
         </div>
     </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Rajeshkumar Natarajan. All rights reserved.</p>
             <p style="margin-top:10px;color:#94a3b8;">Built with passion for RF Engineering Excellence</p>
- 
+        </div>
+    </footer>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <h3 id="modalTitle"></h3>
+                <div class="modal-company" id="modalCompany"></div>
+                <div class="modal-badges" id="modalBadges"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const data = {
+            foxconn: {
+                title: 'Senior Engineer',
+                company: 'Foxconn Hon Hai India Mega Development',
+                location: 'Bengaluru, Karnataka',
+                period: 'June 2024 – Present',
+                bullets: [
+                    'Perform Total Radiated Power (TRP) and Total Isotropic Sensitivity (TIS) testing in both signaling and non-signaling modes for cellular, Wi-Fi, and Bluetooth radios.',
+                    'Conduct beamforming validation for 5G (Sub-6 GHz and mmWave) antennas by analyzing EIRP, EIS, and directional gain patterns.',
+                    'Evaluate and characterize antenna performance including gain, efficiency, radiation pattern, and polarization for diverse form factors (smartphones, routers, wearables, etc.).',
+                    'Execute spurious emissions testing across frequency bands using spectrum analyzers and EMI receivers to ensure compliance with 3GPP, FCC, CE, and regional regulatory limits.',
+                    'Perform antenna desense testing in the presence of co-located radios (Wi-Fi, BT, GPS) to assess performance degradation and optimize layout.',
+                    'Carry out Wi-Fi throughput, Bluetooth sensitivity, and coexistence testing under dynamic RF conditions using automation platforms.',
+                    'Operate and maintain OTA test chambers like Satimo SG64, StarLab, and ETS-Lindgren Compact Antenna Test Range (CATR).',
+                    'Use RF test equipment such as R&amp;S CMW500, VNA, Spectrum Analyzer, and Signal Generator for accurate measurement and troubleshooting.',
+                    'Generate detailed and traceable reports with result interpretation aligned with 3GPP, CTIA, FCC, and carrier-specific KPIs.',
+                    'Collaborate with RF, antenna design, certification, and product validation teams for test planning, debugging, and system-level RF optimization.',
+                ],
+                tags: ['Satimo SG64', 'StarLab', 'ETS-Lindgren CATR', 'R&S CMW500', 'VNA', 'Spectrum Analyzer', '3GPP', 'FCC / CE', 'CTIA']
+            },
+            tata: {
+                title: 'Senior Executive',
+                company: 'Tata Advanced Systems Limited',
+                location: 'Bengaluru, Karnataka',
+                period: 'April 2022 – June 2024',
+                bullets: [
+                    'Spearheaded and executed comprehensive EMI/EMC testing procedures in compliance with rigorous military standards, ensuring all electronic systems met critical safety and performance benchmarks.',
+                    'Authored and maintained detailed documentation for NABL audit activities, developing a systematic approach to document management that significantly enhanced audit readiness and compliance.',
+                    'Conducted extensive on-site testing for electromagnetic shielding effectiveness, evaluating and enhancing the shielding properties of various materials for more secure electronic systems.',
+                    'Created comprehensive NABL test reports upon completion of EMI/EMC tests, including detailed analysis, findings, and recommendations to ensure stakeholders were well-informed about test outcomes and any necessary corrective actions.',
+                    'Provided expert support to cross-functional teams in EMI/EMC testing and problem-solving, offering technical guidance to ensure projects met stringent testing standards and deadlines.',
+                ],
+                tags: ['MIL-STD-461', 'NABL Audit', 'EMI/EMC Testing', 'Shielding Effectiveness', 'Technical Documentation']
+            },
+            eltek: {
+                title: 'Executive',
+                company: 'Eltek Solutions',
+                location: 'Chennai, Tamil Nadu',
+                period: 'January 2018 – April 2022',
+                bullets: [
+                    'Executed comprehensive RF testing across multiple frequency bands and wireless standards, ensuring product performance and regulatory compliance.',
+                    'Developed data visualization reports to present complex RF measurement data in actionable formats for engineering and management teams.',
+                    'Collaborated with cross-functional teams including hardware, software, and product management to deliver data-driven solutions for business challenges.',
+                    'Supported the full RF testing lifecycle from test plan development through execution, analysis, and final reporting.',
+                    'Maintained and calibrated RF test equipment, ensuring measurement accuracy and traceability to national standards.',
+                ],
+                tags: ['RF Testing', 'Data Visualization', 'Test Automation', 'Equipment Calibration', 'Technical Reporting']
+            },
+            sc: {
+                title: 'Analyst',
+                company: 'Standard Chartered Global Business Services',
+                location: 'Chennai, Tamil Nadu',
+                period: 'July 2015 – December 2017',
+                bullets: [
+                    'Spearheaded a dedicated quality assurance team, focusing on streamlining processes and enhancing product quality across various projects using a proactive approach to identify and resolve quality issues.',
+                    'Ensured meticulous maintenance of audit documentation, aligning with industry standards and regulatory requirements; played a pivotal role in successfully passing internal and external audits.',
+                    'Established a robust documentation framework that facilitated easy access to compliance and quality records, significantly enhancing audit readiness.',
+                    'Conducted comprehensive reviews of quality systems and processes, coordinating with cross-functional teams to ensure quality objectives were integrated at every stage of the product lifecycle.',
+                    'Drove continuous improvement efforts by analyzing performance data, identifying trends, and implementing corrective actions to optimize operational efficiency and reduce waste.',
+                ],
+                tags: ['Quality Assurance', 'Audit Compliance', 'Process Improvement', 'Documentation Management', 'Cross-functional Leadership']
+            }
+        };
+
+        function openModal(id) {
+            const exp = data[id];
+            document.getElementById('modalTitle').textContent = exp.title;
+            document.getElementById('modalCompany').textContent = exp.company;
+            document.getElementById('modalBadges').innerHTML =
+                `<span class="modal-badge">📍 ${exp.location}</span><span class="modal-badge">📅 ${exp.period}</span>`;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section-title">Key Responsibilities</div>
+                <ul class="modal-bullets">
+                    ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+                </ul>
+                <div class="modal-section-title">Technologies &amp; Standards</div>
+                <div class="modal-tags">
+                    ${exp.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+                </div>
+            `;
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('modalOverla
